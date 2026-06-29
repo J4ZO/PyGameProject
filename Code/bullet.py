@@ -1,5 +1,5 @@
 import pygame
-
+from settings import *
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, player_position,bullet_img, mouse_x, mouse_y):
         super().__init__()
@@ -15,4 +15,8 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         self.position += self.direction * self.speed_bullet
         self.rect.center = self.position
+
+        if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.top > HEIGHT or self.rect.bottom < -HEIGHT: 
+            print("killed")
+            self.kill()
 
