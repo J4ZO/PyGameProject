@@ -1,4 +1,5 @@
 import pygame
+import math
 from bullet import *
 
 class Player(pygame.sprite.Sprite):
@@ -6,15 +7,15 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.screen = screen
         self.speed = speed
+        self.original_image = pygame.image.load("Images/ship_1.png")
 
-        self.image = pygame.image.load("Images/ship_1.png")
+        self.image = self.original_image
+
         self.rect = self.image.get_rect()
         self.rect.center = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
-
-
-        self.player_pos = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
         self.direction = pygame.Vector2(0, 0)
 
+        # Bullet group
         self.bullet_group = b_group
 
         self.bullet_image = pygame.image.load("Images/shot.png")
@@ -42,12 +43,24 @@ class Player(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.move_ip(self.direction.x * self.speed, self.direction.y * self.speed)
+    
+    def rotate(self, x_value,y_value):
+        x = x_value
+        y = y_value
+        distancex = self.rect.centerx- x
+        distancey = self.rect.centery - y
+        print(f"x Value {distancex}, y value {distancey}")
+        angle = math.degrees(math.atan2(distancex, distancey))
 
+        self.image = pygame.transform.rotate(self.original_image, angle)
 
-    def update(self):
+        self.rect = self.image.get_rect(center = self.rect.center)
+
+    def update(self, x_value,y_value):
         self.input()
         self.move()
         self.draw()
+        self.rotate(x_value,y_value)
 
 
     def draw(self):
