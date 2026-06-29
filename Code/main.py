@@ -10,7 +10,12 @@ class Game:
         pygame.display.set_caption("Game")
 
         self.dt = 0
-        self.player = Player(self.screen)
+        self.bullet_group = pygame.sprite.Group()
+
+
+        self.player = Player(self.screen, 5 ,self.bullet_group)
+
+        
     
 
     def run(self):
@@ -19,13 +24,19 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        self.player.shoot()
 
         
 
             self.screen.fill("black")
-            self.player.move_player(1, self.dt)
-            pygame.display.flip()
-            self.dt = self.clock.tick(FPS)
+            self.player.update()
+            self.bullet_group.update()
+            self.bullet_group.draw(self.screen)
+
+            pygame.display.update()
+            self.dt = self.clock.tick(FPS) / 1000
 
 
 if __name__ == "__main__":
