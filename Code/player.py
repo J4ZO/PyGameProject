@@ -49,7 +49,7 @@ class Player(pygame.sprite.Sprite):
         y = y_value
         distancex = self.rect.centerx- x
         distancey = self.rect.centery - y
-        print(f"x Value {distancex}, y value {distancey}")
+        print(x_value, y_value)
         angle = math.degrees(math.atan2(distancex, distancey))
 
         self.image = pygame.transform.rotate(self.original_image, angle)
@@ -70,4 +70,7 @@ class Player(pygame.sprite.Sprite):
     def shoot(self, mouse_x,mouse_y):
         bullet = Bullet(self.rect.center , self.bullet_image, mouse_x,mouse_y)
         self.bullet_group.add(bullet)
+
+    def get_player_position(self):
+        return self.rect.center
 
