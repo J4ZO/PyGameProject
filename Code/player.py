@@ -15,7 +15,7 @@ class Player(pygame.sprite.Sprite):
         self.rect.center = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
         self.direction = pygame.Vector2(0, 0)
 
-        # Bullet group
+    
         self.bullet_group = b_group
 
         self.bullet_image = pygame.image.load("Images/shot.png")

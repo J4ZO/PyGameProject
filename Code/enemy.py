@@ -16,7 +16,6 @@ class Enemy(pygame.sprite.Sprite):
 
         self.direction = pygame.Vector2(0, 0)
         
-        # Bullet group
         self.bullet_group = b_group
 
         self.bullet_image = pygame.image.load("Images/shot.png")
@@ -47,6 +46,9 @@ class Enemy(pygame.sprite.Sprite):
     def shoot(self):
         bullet = Bullet(self.rect.center , self.bullet_image, self.target.x, self.target.y_y)
         self.bullet_group.add(bullet)
+
+    def kill_enemy(self):
+        self.kill()
 
     def update(self, target_updated):
         self.target = target_updated

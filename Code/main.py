@@ -20,7 +20,7 @@ class Game:
         
 
         self.spawn_enemy = pygame.USEREVENT + 1
-        pygame.time.set_timer(self.spawn_enemy, 2000)
+        pygame.time.set_timer(self.spawn_enemy, 500)
     
 
     def run(self):
@@ -47,6 +47,9 @@ class Game:
             self.player.update(mouse_x,mouse_y)
 
             self.bullet_group.update()
+
+            pygame.sprite.groupcollide(self.enemy_group,self.bullet_group,True,True)
+            
             self.bullet_group.draw(self.screen)
 
             self.enemy_group.update(self.player.get_player_position())
