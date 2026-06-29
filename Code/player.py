@@ -67,8 +67,7 @@ class Player(pygame.sprite.Sprite):
         self.screen.blit(self.image, self.rect )
     
     # Shoot
-    def shoot(self):
-        bullet = Bullet(self.rect.center , self.bullet_image )
+    def shoot(self, mouse_x,mouse_y):
+        bullet = Bullet(self.rect.center , self.bullet_image, mouse_x,mouse_y)
         self.bullet_group.add(bullet)
-        print("Bullet group: ")
 

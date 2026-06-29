@@ -19,19 +19,21 @@ class Game:
 
     def run(self):
         while True:
+            posicion_mouse = pygame.mouse.get_pos()
+    
+            mouse_x = posicion_mouse[0]
+            mouse_y = posicion_mouse[1]
+
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
-                        self.player.shoot()
+                        self.player.shoot(mouse_x,mouse_y)
 
 
-            posicion_mouse = pygame.mouse.get_pos()
-    
-            mouse_x = posicion_mouse[0]
-            mouse_y = posicion_mouse[1]
 
             self.screen.fill("black")
             self.player.update(mouse_x,mouse_y)
