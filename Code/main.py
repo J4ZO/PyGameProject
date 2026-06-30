@@ -35,25 +35,37 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        self.player.shoot(mouse_x,mouse_y)
-                if event.type == self.spawn_enemy:
-                    self.spawn.spawn(self.player.get_player_position())
+                
+                if not self.player.get_player_dead():
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if event.button == 1:
+                            self.player.shoot(mouse_x,mouse_y)
+                    if event.type == self.spawn_enemy:
+                        self.spawn.spawn(self.player.get_player_position())
 
-
+                
 
             self.screen.fill("black")
             self.player.update(mouse_x,mouse_y)
 
             self.bullet_group.update()
 
-            pygame.sprite.groupcollide(self.enemy_group,self.bullet_group,True,True)
+            enemy_deaths = pygame.sprite.groupcollide(self.enemy_group,self.bullet_group,False,True)
+
+            for enemy in enemy_deaths:
+                enemy.start_death()
             
             self.bullet_group.draw(self.screen)
 
+            if(pygame.sprite.spritecollide(self.player, self.enemy_group, True)):
+                self.player.take_damage(20)
+
             self.enemy_group.update(self.player.get_player_position())
+        
             self.enemy_group.draw(self.screen)
+            if self.player.get_player_dead():
+                self.player.animated_death()
+    
             pygame.display.update()
             self.clock.tick(FPS) / 1000
 

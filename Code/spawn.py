@@ -20,7 +20,4 @@ class Spawn():
 
         enemy = Enemy(target_player, self.image_enemy, self.bullet_group, self.speed_enemy, self.positions[index])
         self.enemy_group.add(enemy)
-
-        print("Creado enemy")
-        print(len(self.enemy_group))
         

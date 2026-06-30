@@ -19,5 +19,4 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.center = self.position
 
         if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.top > HEIGHT or self.rect.bottom < -HEIGHT: 
-            print("killed")
             self.kill()
