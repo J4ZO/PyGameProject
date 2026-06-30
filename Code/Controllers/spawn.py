@@ -1,7 +1,7 @@
 from random import randint
 
 import pygame
-from enemy import *
+from .enemy import *
 from settings import *
 
 class Spawn():

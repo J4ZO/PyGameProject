@@ -1,7 +1,7 @@
 import pygame
 import math
-from bullet import *
-from sprites import *
+from .bullet import *
+from .sprites import *
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, target_player, image_enemy, b_group, speed_enemy, enemy_start_position):

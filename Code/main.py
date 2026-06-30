@@ -1,7 +1,8 @@
 import pygame, sys
 from settings import *
-from player import *
-from spawn import *
+from Controllers.player import *
+from Controllers.spawn import *
+from UI.menu import *
 
 class Game:
     def __init__(self):
@@ -21,6 +22,10 @@ class Game:
 
         self.spawn_enemy = pygame.USEREVENT + 1
         pygame.time.set_timer(self.spawn_enemy, 500)
+
+        self.font = "Assets/Pixel Space.ttf"
+
+        self.menu = Menu(self.screen, self.font, self.run)
     
 
     def run(self):
@@ -69,8 +74,10 @@ class Game:
             pygame.display.update()
             self.clock.tick(FPS) / 1000
 
+    def main_menu(self):
+        self.menu.main_menu()
 
 if __name__ == "__main__":
     game = Game()
-    game.run()
+    game.main_menu()
 

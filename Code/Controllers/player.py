@@ -1,7 +1,7 @@
 import pygame
 import math
-from bullet import *
-from sprites import *
+from .bullet import *
+from .sprites import *
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, screen, speed, b_group):
