@@ -25,21 +25,21 @@ class Game:
         self.spawn_enemy = pygame.USEREVENT + 1
         pygame.time.set_timer(self.spawn_enemy, 500)
 
-        self.font = "Assets/Pixel Space.ttf"
+        self.font = resource_path("Assets/Pixel Space.ttf")
 
-        self.background = pygame.image.load("Images/background.png").convert()
+        self.background = pygame.image.load(resource_path("Images/background.png")).convert()
         self.background = pygame.transform.scale(self.background, (WIDTH, HEIGHT))
 
         
 
-        self.shoot_sound = pygame.mixer.Sound("Audio/LaserShoot.wav")
+        self.shoot_sound = pygame.mixer.Sound(resource_path("Audio/LaserShoot.wav"))
 
         self.menu = Menu(self.screen, self.font, self.run, self.background)
         self.game_over = GameOver(self.screen, self.font, self.restart_values)
     
 
     def run(self):
-        self.battle = pygame.mixer.music.load("Audio/battle.wav")
+        self.battle = pygame.mixer.music.load(resource_path("Audio/battle.wav"))
         pygame.mixer.music.set_volume(0.2)
         pygame.mixer.music.play(-1)
 

@@ -1,5 +1,6 @@
 import pygame, sys
 from .button import *
+from settings import *
 
 
 class GameOver():
@@ -25,8 +26,8 @@ class GameOver():
             menu_text = self.get_font(self.font,100).render("GAME OVER", True, "#ffffff")
             menu_rect = menu_text.get_rect(center =(640,250))
 
-            play_button = Button(pygame.image.load("Images/bg_button_large.png"), (640, 400), "RESTART", self.get_font(self.font, 75), "#ffffff", "#e80000")
-            quit_button = Button(pygame.image.load("Images/bg_button.png"), (640, 550), "QUIT", self.get_font(self.font, 75), "#ffffff", "#e80000")
+            play_button = Button(pygame.image.load(resource_path("Images/bg_button_large.png")), (640, 400), "RESTART", self.get_font(self.font, 75), "#ffffff", "#e80000")
+            quit_button = Button(pygame.image.load(resource_path("Images/bg_button.png")), (640, 550), "QUIT", self.get_font(self.font, 75), "#ffffff", "#e80000")
 
             self.screen.blit(menu_text, menu_rect)
 

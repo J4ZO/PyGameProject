@@ -6,7 +6,7 @@ from settings import *
 
 class Spawn():
     def __init__(self, enemy_group,b_group):
-        self.image_enemy = pygame.image.load("Images/enemy_ship.png")
+        self.image_enemy = pygame.image.load(resource_path("Images/enemy_ship.png"))
         self.speed_enemy = 3
 
         self.bullet_group = b_group

@@ -21,9 +21,9 @@ class Enemy(pygame.sprite.Sprite):
         
         self.bullet_group = b_group
 
-        self.bullet_image = pygame.image.load("Images/shot.png")
+        self.bullet_image = pygame.image.load(resource_path("Images/shot.png"))
 
-        path = "Images/dead.png"
+        path = resource_path("Images/dead.png")
         self.sheet_dead = Sprites(path,48,48,7)
 
         self.sprite_dead = self.sheet_dead.get_frames()

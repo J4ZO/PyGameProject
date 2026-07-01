@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__()
         self.screen = screen
         self.speed = speed
-        self.original_image = pygame.image.load("Images/ship_1.png")
+        self.original_image = pygame.image.load(resource_path("Images/ship_1.png"))
 
         self.image = self.original_image
 
@@ -22,9 +22,9 @@ class Player(pygame.sprite.Sprite):
 
         self.bullet_group = b_group
 
-        self.bullet_image = pygame.image.load("Images/shot.png")
+        self.bullet_image = pygame.image.load(resource_path("Images/shot.png"))
 
-        path = "Images/dead.png"
+        path = resource_path("Images/dead.png")
         self.sheet_dead = Sprites(path,48,48,7)
 
         self.sprite_dead = self.sheet_dead.get_frames()
