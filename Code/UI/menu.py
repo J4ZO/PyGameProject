@@ -1,11 +1,22 @@
 import pygame, sys
 from .button import *
+from .image import *
 
 class Menu:
-    def __init__(self, screen, font, on_play):
+    def __init__(self, screen, font, on_play, menu_bg):
         self.screen = screen
         self.font = font
         self.on_play = on_play
+        self.bg = menu_bg
+        self.music_menu = pygame.mixer.music.load("Audio/main_menu.wav")
+        pygame.mixer.music.set_volume(1)
+        pygame.mixer.music.play(-1)
+
+        self.image_movement = pygame.image.load("Images/movement.png")
+        self.image_movement = pygame.transform.scale(self.image_movement, (349, 180))
+
+        self.image_shoot = pygame.image.load("Images/shoot.png")
+        self.image_shoot = pygame.transform.scale(self.image_shoot, (217, 180))
 
     def main_menu(self):
         while True:
@@ -20,6 +31,7 @@ class Menu:
                         pygame.quit()
                         sys.exit()
 
+            self.screen.blit(self.bg, (0, 0)) 
 
             position_mouse = pygame.mouse.get_pos()
             menu_text = self.get_font(self.font,100).render("MAIN MENU", True, "#ffffff")
@@ -27,6 +39,9 @@ class Menu:
 
             play_button = Button(pygame.image.load("Images/bg_button.png"), (640, 250), "PLAY", self.get_font(self.font, 75), "#ffffff", "#CDECFF")
             quit_button = Button(pygame.image.load("Images/bg_button.png"), (640, 400), "QUIT", self.get_font(self.font, 75), "#ffffff", "#CDECFF")
+        
+            ImageMenu(self.image_movement, (300, 500), self.screen)
+            ImageMenu(self.image_shoot, (1000, 500), self.screen)
 
             self.screen.blit(menu_text, menu_rect)
 

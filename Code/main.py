@@ -8,6 +8,7 @@ from UI.game_over import *
 class Game:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         self.clock = pygame.time.Clock()
         pygame.display.set_caption("Game")
@@ -26,11 +27,22 @@ class Game:
 
         self.font = "Assets/Pixel Space.ttf"
 
-        self.menu = Menu(self.screen, self.font, self.run)
+        self.background = pygame.image.load("Images/background.png").convert()
+        self.background = pygame.transform.scale(self.background, (WIDTH, HEIGHT))
+
+        
+
+        self.shoot_sound = pygame.mixer.Sound("Audio/LaserShoot.wav")
+
+        self.menu = Menu(self.screen, self.font, self.run, self.background)
         self.game_over = GameOver(self.screen, self.font, self.restart_values)
     
 
     def run(self):
+        self.battle = pygame.mixer.music.load("Audio/battle.wav")
+        pygame.mixer.music.set_volume(0.2)
+        pygame.mixer.music.play(-1)
+
         while True:
             posicion_mouse = pygame.mouse.get_pos()
     
@@ -47,12 +59,13 @@ class Game:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if event.button == 1:
                             self.player.shoot(mouse_x,mouse_y)
+                            self.shoot_sound.play()
                     if event.type == self.spawn_enemy:
                         self.spawn.spawn(self.player.get_player_position())
 
                 
 
-            self.screen.fill("black")
+            self.screen.blit(self.background, (0, 0)) 
             self.player.update(mouse_x,mouse_y)
 
             self.bullet_group.update()
