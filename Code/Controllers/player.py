@@ -97,9 +97,22 @@ class Player(pygame.sprite.Sprite):
         return self.is_dead
     
 
-    def animated_death(self):
+    def animated_death(self, game_over):
         if self.current_sprite < len(self.sprite_dead):
             self.image = self.sprite_dead[int(self.current_sprite)]
             self.current_sprite += 0.2
         else:
-            self.kill()    
+            self.kill()   
+            game_over() 
+
+    def reset(self):
+        self.is_dead  = False
+        self.image = self.original_image
+
+        self.rect = self.image.get_rect()
+        self.rect.center = pygame.Vector2(self.screen.get_width() / 2, self.screen.get_height() / 2)
+        self.direction = pygame.Vector2(0, 0)
+
+        self.health = 100
+
+        self.current_sprite = 0

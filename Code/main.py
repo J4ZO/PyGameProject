@@ -3,6 +3,7 @@ from settings import *
 from Controllers.player import *
 from Controllers.spawn import *
 from UI.menu import *
+from UI.game_over import * 
 
 class Game:
     def __init__(self):
@@ -26,6 +27,7 @@ class Game:
         self.font = "Assets/Pixel Space.ttf"
 
         self.menu = Menu(self.screen, self.font, self.run)
+        self.game_over = GameOver(self.screen, self.font, self.restart_values)
     
 
     def run(self):
@@ -69,13 +71,21 @@ class Game:
         
             self.enemy_group.draw(self.screen)
             if self.player.get_player_dead():
-                self.player.animated_death()
+                self.player.animated_death(self.game_over.game_over)
     
             pygame.display.update()
             self.clock.tick(FPS) / 1000
 
     def main_menu(self):
         self.menu.main_menu()
+
+    def restart_values(self):
+        self.player.reset()
+
+        self.bullet_group.empty()
+        self.enemy_group.empty()
+
+        self.run()
 
 if __name__ == "__main__":
     game = Game()
